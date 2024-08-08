@@ -44,9 +44,9 @@ function Home() {
   );
   return (
     <div className="movie-cards">
-      {moviesList.map((movie) => {
+      {moviesList.map((movie, ind) => {
         return (
-          <div className="movie-card">
+          <div className="movie-card" key={ind}>
             <div style={{ fontWeight: 550, fontSize: sizes, marginBottom: 30 }}>
               {movie.Title}
             </div>
