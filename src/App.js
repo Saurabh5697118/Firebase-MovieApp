@@ -27,10 +27,12 @@ function App() {
   ];
   let routesElement = useRoutes(routesArray);
   return (
-    <AuthProvider>
-      <Header />
-      <div>{routesElement}</div>
-    </AuthProvider>
+    <div className="App">
+      <AuthProvider>
+        <Header />
+        <div>{routesElement}</div>
+      </AuthProvider>
+    </div>
   );
 }
 
