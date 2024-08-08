@@ -18,6 +18,10 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (password != confirmPassword) {
+      alert("Confirm password doesn't matches with password...");
+      return;
+    }
     if (!isRegistering) {
       setIsRegistering(true);
       doCreateUserWithEmailAndPassword(email, password)
@@ -38,10 +42,10 @@ const Register = () => {
         <h2 style={{ fontSize: sizes }}>Register</h2>
         <form onSubmit={onSubmit} className="signUp-login-form">
           <div className="creds">
-            <label style={{ fontSize: sizes2 }}>Email</label>
             <input
               type="email"
               autoComplete="email"
+              placeholder="Email..."
               required
               value={email}
               onChange={(e) => {
@@ -51,11 +55,11 @@ const Register = () => {
             />
           </div>
           <div className="creds">
-            <label style={{ fontSize: sizes2 }}>Password</label>
             <input
               disabled={isRegistering}
               type="password"
               autoComplete="new-password"
+              placeholder="Password..."
               required
               value={password}
               onChange={(e) => {
@@ -66,10 +70,10 @@ const Register = () => {
           </div>
 
           <div className="creds">
-            <label style={{ fontSize: sizes2 }}>Confirm Password</label>
             <input
               disabled={isRegistering}
               type="password"
+              placeholder="Confirm Password..."
               autoComplete="off"
               required
               value={confirmPassword}
