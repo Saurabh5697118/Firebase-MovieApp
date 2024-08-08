@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-// import "./App.css";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { Navigate, useNavigate } from "react-router-dom";
 import { db } from "../Firebase/FirebaseConfig";
@@ -9,8 +8,12 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
+import { useMediaQuery } from "@mui/material";
 
 function Home() {
+  let mobView = useMediaQuery("(max-width:576px)");
+  let tabView = useMediaQuery("(max-width:1024px)");
+  let sizes = mobView ? 14 : tabView ? 18 : 24;
   const usersCollectionRef = collection(db, "Movies");
   const navigate = useNavigate();
   const { currentUser, setUserLoggedIn, moviesList, setMoviesList } = useAuth();
@@ -25,11 +28,6 @@ function Home() {
 
     getUsers();
   }, []);
-  const rated = <StarOutlinedIcon sx={{ color: "#ffa500a1", fontSize: 24 }} />;
-  const unRated = (
-    <StarOutlineOutlinedIcon sx={{ color: "#ffa500a1", fontSize: 24 }} />
-  );
-
   const handleDelete = async (movie) => {
     const userDoc = doc(db, "Movies", movie.id);
     await deleteDoc(userDoc);
@@ -38,31 +36,37 @@ function Home() {
     );
   };
 
+  const rated = (
+    <StarOutlinedIcon sx={{ color: "#ffa500a1", fontSize: sizes }} />
+  );
+  const unRated = (
+    <StarOutlineOutlinedIcon sx={{ color: "#ffa500a1", fontSize: sizes }} />
+  );
   return (
     <div className="movie-cards">
       {moviesList.map((movie) => {
         return (
-          <div className="movie-card" key={movie.id}>
-            <div style={{ fontWeight: 550, fontSize: 24, marginBottom: 30 }}>
+          <div className="movie-card">
+            <div style={{ fontWeight: 550, fontSize: sizes, marginBottom: 30 }}>
               {movie.Title}
             </div>
             <div className="card-rating-operator">
               <div
                 style={{
                   fontWeight: 300,
-                  fontSize: 16,
+                  fontSize: mobView ? 10 : tabView ? 12 : 18,
                   color: "#515050",
                   display: "flex",
                 }}
               >
-                Rating: {[...Array(+movie.Rating)].map((data) => rated)}
-                {[...Array(5 - +movie.Rating)].map((data) => unRated)}
+                Rating: {[...Array(movie.Rating)].map((data) => rated)}
+                {[...Array(5 - movie.Rating)].map((data) => unRated)}
               </div>
 
               <div className="card-edit-del-buttons">
                 <EditOutlinedIcon
                   onClick={() => navigate(`/${movie.id}`)}
-                  sx={{ cursor: "pointer", fontSize: 24 }}
+                  sx={{ cursor: "pointer", fontSize: sizes }}
                 />
                 <DeleteOutlineOutlinedIcon
                   onClick={() => handleDelete(movie)}
@@ -70,7 +74,7 @@ function Home() {
                     margin: "0px 5px",
                     cursor: "pointer",
                     color: "#ff0000ab",
-                    fontSize: 24,
+                    fontSize: sizes,
                   }}
                 />
               </div>
@@ -78,7 +82,6 @@ function Home() {
           </div>
         );
       })}
-
       <div className="add-card" onClick={() => navigate("/create")}>
         <AddCircleTwoToneIcon />
       </div>

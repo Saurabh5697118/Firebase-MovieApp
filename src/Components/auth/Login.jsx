@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@mui/material";
 import React, { useState } from "react";
 import { Navigate, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Auth/AuthContext";
@@ -10,6 +11,10 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LoginPageLogo from "../LoginPageLogo";
 
 const Login = () => {
+  let mobView = useMediaQuery("(max-width:576px)");
+  let tabView = useMediaQuery("(max-width:1024px)");
+  let sizes = mobView ? 14 : tabView ? 16 : 20;
+  let sizes2 = mobView ? 10 : tabView ? 12 : 16;
   const { userLoggedIn, setUserLoggedIn } = useAuth();
   const navigate = useNavigate();
 
@@ -22,7 +27,9 @@ const Login = () => {
     if (!isSigningIn) {
       setIsSigningIn(true);
       await doSignInWithEmailAndPassword(email, password)
-        .then((res) => navigate("/home"))
+        .then((res) => {
+          navigate("/home");
+        })
         .catch((err) => {
           alert(err.message);
 
@@ -36,7 +43,9 @@ const Login = () => {
     if (!isSigningIn) {
       setIsSigningIn(true);
       doSignInWithGoogle()
-        .then((res) => navigate("/home"))
+        .then((res) => {
+          navigate("/home");
+        })
         .catch((err) => {
           alert(err.message);
           setIsSigningIn(false);
@@ -47,7 +56,7 @@ const Login = () => {
     <div className="signUp-Login-container">
       <LoginPageLogo />
       <div>
-        <h2>Login</h2>
+        <h2 style={{ fontSize: sizes }}>Login</h2>
         <form onSubmit={onSubmit} className="signUp-login-form">
           <div className="creds">
             <input
@@ -59,9 +68,9 @@ const Login = () => {
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
+              style={{ fontSize: sizes2 }}
             />
           </div>
-
           <div className="creds">
             <input
               type="password"
@@ -72,10 +81,15 @@ const Login = () => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
+              style={{ fontSize: sizes2 }}
             />
           </div>
           <div className="creds">
-            <button type="submit" disabled={isSigningIn}>
+            <button
+              style={{ fontSize: sizes2 }}
+              type="submit"
+              disabled={isSigningIn}
+            >
               {isSigningIn ? "Signing In..." : "Sign In"}
             </button>
           </div>
@@ -84,7 +98,7 @@ const Login = () => {
           Create New Account? <Link to="/register">Register</Link>
         </div>
         <div className="social-media-Orline">
-          -------------------- Or Login with Others --------------------
+          ------------- Or Login with Others -------------
         </div>
         <div className="social-media-icons">
           <button

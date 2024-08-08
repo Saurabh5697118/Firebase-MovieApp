@@ -18,6 +18,7 @@
   width: 100%;
   align-items: center;
 }
+
 .header {
   position: fixed;
   top: 0;
@@ -32,31 +33,37 @@
 .header:hover {
   background-color: #00000085;
 }
-.header-firebase-logo{
+.header-firebase-logo {
   display: flex;
   color: honeydew;
   margin: 0px 20px;
+  align-items: center;
 }
-.header-logout-logo{
+.header-firebase-logo > img {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+.header-logout-logo {
   display: flex;
-    margin: 0px 20px;
-    /* justify-content: center; */
-    align-items: center;
+  margin: 0px 20px;
+  /* justify-content: center; */
+  align-items: center;
 }
-.header-logout-logo > button{
+.header-logout-logo > button {
   margin: 0px 5px;
-    background: transparent;
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-  
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
 }
-.header-logout-logo:hover > button{
-    background: rgba(245, 217, 165, 0.801);
-    /* color: white; */
-  
+.header-logout-logo > Link {
+  color: honeydew;
 }
-
+.header-logout-logo:hover > button {
+  background: rgba(245, 217, 165, 0.801);
+  /* color: white; */
+}
 
 .signUp-Login-container {
   background-color: white;
@@ -96,10 +103,12 @@
 textarea {
   padding: 10px;
   cursor: pointer;
-  font-size: 16px;
+  /* font-size: 16px; */
   border-radius: 10px;
   border: none;
-  width: 300px;
+  width: 50vw;
+  max-width: 280px;
+  min-width: 200px;
   outline: none;
   background-color: #d3d3d378;
   font-family: cursive;
@@ -124,7 +133,11 @@ textarea {
 
 .home-filter {
   text-align: center;
-  margin: 30px;
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 .home-filter > button {
   width: 100px;
@@ -132,7 +145,7 @@ textarea {
   padding: 5px;
   border: none;
   font-family: cursive;
-  margin: 0 5px;
+  margin: 15px;
   background: #faebd7a1;
   font-weight: 600;
 }
@@ -162,7 +175,7 @@ textarea {
   box-shadow: 1px 1px 5px 5px #0000001c;
 
   max-width: 300px;
-  min-width: 250px;
+  min-width: 200px;
   width: 30vw;
 }
 .movie-card:hover,
@@ -173,6 +186,7 @@ textarea {
 .card-rating-operator {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .card-edit-del-buttons {
   color: rgba(128, 128, 128, 0.795);

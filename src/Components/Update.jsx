@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useMediaQuery } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../Auth/AuthContext";
 import { db } from "../Firebase/FirebaseConfig";
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 
 const Update = () => {
+  let mobView = useMediaQuery("(max-width:576px)");
+  let tabView = useMediaQuery("(max-width:1024px)");
+  let sizes = mobView ? 14 : tabView ? 16 : 20;
+  let sizes2 = mobView ? 10 : tabView ? 12 : 16;
   const { id } = useParams();
   const [movieData, setMovieData] = useState({});
   const usersCollectionRef = collection(db, "Movies");
@@ -45,46 +50,48 @@ const Update = () => {
   return (
     <div className="update-create-movie">
       <form onSubmit={handleSubmit}>
-        <h2 style={{ marginBottom: 40 }}>Update Movie Details </h2>
+      <h2 style={{marginBottom: 40, fontSize: sizes}}>Update Movie Details </h2>
         <div className="creds">
-          <label htmlFor="Title">Title</label>
+          <label style={{ fontSize: sizes2}} htmlFor="Title">Title</label>
           <input
             id="Title"
             placeholder="Title..."
             value={movieData.Title}
-            type="text"
+            type="text" 
+            style={{ fontSize: sizes2}}
             onChange={(e) =>
-              setMovieData({ ...movieData, [e.target.id]: e.target.value })
-            }
+                setMovieData({ ...movieData, [e.target.id]: e.target.value })
+              }
           />
         </div>
         <div className="creds">
-          <label htmlFor="Method">Method</label>
-          <textarea
-            id="Method"
-            placeholder="Description..."
-            value={movieData.Method}
-            onChange={(e) =>
-              setMovieData({ ...movieData, [e.target.id]: e.target.value })
-            }
-          />
+        <label style={{ fontSize: sizes2}} htmlFor="Method">Description</label>
+        <textarea
+          id="Method"
+          placeholder="Description..."
+          value={movieData.Method}
+          onChange={(e) =>
+            setMovieData({ ...movieData, [e.target.id]: e.target.value })
+          }
+           style={{ fontSize: sizes2}}/>
+           </div>
+        <div className="creds">
+        <label style={{ fontSize: sizes2}} htmlFor="Rating">Rating</label>
+        <input
+          id="Rating"
+          value={movieData.Rating}
+          type="number"
+          placeholder="Rating..."
+          max={5}
+          min={0}
+          onChange={(e) =>
+            setMovieData({ ...movieData, [e.target.id]: e.target.value })
+          }
+        style={{ fontSize: sizes2}}
+        />
         </div>
         <div className="creds">
-          <label htmlFor="Rating">Rating</label>
-          <input
-            id="Rating"
-            value={movieData.Rating}
-            type="number"
-            placeholder="Rating..."
-            max={5}
-            min={0}
-            onChange={(e) =>
-              setMovieData({ ...movieData, [e.target.id]: e.target.value })
-            }
-          />
-        </div>
-        <div className="creds">
-          <button type="submit">Submit</button>
+        <button style={{ fontSize: sizes2}} type="submit">Submit</button>
         </div>
       </form>
     </div>
