@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate, Link, useNavigate } from "react-router-dom";
 import { doCreateUserWithEmailAndPassword } from "../../Firebase/Auth";
-import { useAuth } from "../../Auth/AuthContext";
+import LoginPageLogo from "../LoginPageLogo";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -10,10 +10,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
-  const { userLoggedIn, setUserLoggedIn } = useAuth();
-  // setUserLoggedIn(false)
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!isRegistering) {
@@ -27,63 +24,62 @@ const Register = () => {
         });
     }
   };
-
-  {
-    /* {userLoggedIn && (<Navigate to={'/home'} replace={true} />)} */
-  }
   return (
     <div className="signUp-Login-container">
-      <h2>Register</h2>
-      <form onSubmit={onSubmit} className="signUp-login-form">
-        <div className="creds">
-          <label>Email</label>
-          <input
-            type="email"
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-        </div>
+      <LoginPageLogo />
+      <div>
+        <h2>Register</h2>
+        <form onSubmit={onSubmit} className="signUp-login-form">
+          <div className="creds">
+            <label>Email</label>
+            <input
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </div>
 
-        <div className="creds">
-          <label>Password</label>
-          <input
-            disabled={isRegistering}
-            type="password"
-            autoComplete="new-password"
-            required
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-        </div>
+          <div className="creds">
+            <label>Password</label>
+            <input
+              disabled={isRegistering}
+              type="password"
+              autoComplete="new-password"
+              required
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </div>
 
-        <div className="creds">
-          <label>Confirm Password</label>
-          <input
-            disabled={isRegistering}
-            type="password"
-            autoComplete="off"
-            required
-            value={confirmPassword}
-            onChange={(e) => {
-              setconfirmPassword(e.target.value);
-            }}
-          />
-        </div>
-        <div className="creds">
-          <button type="submit" disabled={isRegistering}>
-            {isRegistering ? "Signing Up..." : "Sign Up"}
-          </button>
-        </div>
-        <div className="register-login-option">
-          Create New Account? <Link to="/login">Login</Link>
-        </div>
-      </form>
+          <div className="creds">
+            <label>Confirm Password</label>
+            <input
+              disabled={isRegistering}
+              type="password"
+              autoComplete="off"
+              required
+              value={confirmPassword}
+              onChange={(e) => {
+                setconfirmPassword(e.target.value);
+              }}
+            />
+          </div>
+          <div className="creds">
+            <button type="submit" disabled={isRegistering}>
+              {isRegistering ? "Signing Up..." : "Sign Up"}
+            </button>
+          </div>
+          <div className="register-login-option">
+            Create New Account? <Link to="/login">Login</Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

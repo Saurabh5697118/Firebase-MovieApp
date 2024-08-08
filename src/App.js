@@ -5,12 +5,22 @@ import Header from "./Components/Header";
 import Login from "./Components/auth/Login";
 import Register from "./Components/auth/Register";
 import Home from "./Components/Home";
+import Create from "./Components/Create";
+import Update from "./Components/Update";
 
 function App() {
   const routesArray = [
     {
       path: "*",
       element: <Login />,
+    },
+    {
+      path: "/create",
+      element: <Create />,
+    },
+    {
+      path: "/:id",
+      element: <Update />,
     },
     {
       path: "/login",

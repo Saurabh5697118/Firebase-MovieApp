@@ -1,29 +1,37 @@
 import React from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Auth/AuthContext";
 import { doSignOut } from "../Firebase/Auth";
+import logo1 from "../assets/firebase_logo_icon_168209 (1).png";
+import { Avatar } from "@mui/material";
 
 const Header = () => {
   const navigate = useNavigate();
   const { userLoggedIn } = useAuth();
-  console.log(userLoggedIn);
-  
+
   return (
-    <nav>
+    <>
       {userLoggedIn && (
-        <>
-          <button
-            onClick={() => {
-              doSignOut().then(() => {
-                navigate("/login");
-              });
-            }}
-          >
-            Logout
-          </button>
-        </>
+        <div className="header">
+          <div className="header-firebase-logo">
+            <img src={logo1} />
+            <h2>Firebase Movies</h2>
+          </div>
+          <div className="header-logout-logo">
+            <Avatar />
+            <button
+              onClick={() => {
+                doSignOut().then(() => {
+                  navigate("/login");
+                });
+              }}
+            >
+              Logout
+            </button>
+          </div>
+        </div>
       )}
-    </nav>
+    </>
   );
 };
 

@@ -18,18 +18,59 @@
   width: 100%;
   align-items: center;
 }
+.header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #00000036;
+  /* height: 70px; */
+  /* padding: 20px; */
+  /* animation: 2s ease; */
+}
+.header:hover {
+  background-color: #00000085;
+}
+.header-firebase-logo{
+  display: flex;
+  color: honeydew;
+  margin: 0px 20px;
+}
+.header-logout-logo{
+  display: flex;
+    margin: 0px 20px;
+    /* justify-content: center; */
+    align-items: center;
+}
+.header-logout-logo > button{
+  margin: 0px 5px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+  
+}
+.header-logout-logo:hover > button{
+    background: rgba(245, 217, 165, 0.801);
+    /* color: white; */
+  
+}
+
 
 .signUp-Login-container {
   background-color: white;
-  padding: 20px 40px;
+  padding: 10px 30px;
   border-radius: 25px;
+  display: flex;
+  align-items: center;
 }
 .signUp-login-form {
   display: flex;
   flex-direction: column;
 }
 
-.register-login-option{
+.register-login-option {
   text-align: center;
   font-size: 10px;
   margin-top: -5px;
@@ -39,11 +80,11 @@
   align-items: center;
   justify-content: space-evenly;
 }
-.social-media-Orline{
+.social-media-Orline {
   text-align: center;
-    font-size: 10px;
-    margin: 20px 0px;
-    color: rgb(104 103 103 / 71%);
+  font-size: 10px;
+  margin: 20px 0px;
+  color: rgb(104 103 103 / 71%);
 }
 
 .creds {
@@ -106,6 +147,7 @@ textarea {
   flex-wrap: wrap;
   height: 100%;
   width: 100%;
+  margin-top: 70px;
 }
 
 .movie-card {
@@ -120,7 +162,7 @@ textarea {
   box-shadow: 1px 1px 5px 5px #0000001c;
 
   max-width: 300px;
-  min-width: 200px;
+  min-width: 250px;
   width: 30vw;
 }
 .movie-card:hover,

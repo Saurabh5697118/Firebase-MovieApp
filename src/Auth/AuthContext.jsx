@@ -17,6 +17,7 @@ export function AuthProvider({ children }) {
   const [isEmailUser, setIsEmailUser] = useState(false);
   const [isGoogleUser, setIsGoogleUser] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [moviesList, setMoviesList] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
@@ -24,10 +25,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function initializeUser(user) {
-    console.log(user);
-    
     if (user) {
-
       setCurrentUser({ ...user });
 
       // check if provider is email and password login
@@ -60,6 +58,8 @@ export function AuthProvider({ children }) {
     setIsEmailUser,
     setIsGoogleUser,
     setUserLoggedIn,
+    moviesList,
+    setMoviesList,
   };
 
   return (
