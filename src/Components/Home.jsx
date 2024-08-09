@@ -17,6 +17,7 @@ function Home() {
   const usersCollectionRef = collection(db, "Movies");
   const navigate = useNavigate();
   const { currentUser, setUserLoggedIn, moviesList, setMoviesList } = useAuth();
+  window.scrollTo(0, 0);
   useEffect(() => {
     if (!currentUser) {
       navigate("/login");
@@ -45,9 +46,24 @@ function Home() {
   return (
     <div className="movie-cards">
       {moviesList.map((movie, ind) => {
+        const animationDelay = 100;
+        const animationDuration = 500;
+        const anim = `movieCardDisplay ${animationDuration}ms ease-out ${
+          animationDelay * (ind + 1)
+        }ms forwards`;
         return (
-          <div className="movie-card" key={ind}>
-            <div style={{ fontWeight: 550, fontSize: sizes, marginBottom: 30 }}>
+          <div
+            className="movie-card"
+            key={ind}
+            style={{ animation: anim, opacity: 0 }}
+          >
+            <div
+              style={{
+                fontWeight: 550,
+                fontSize: sizes,
+                marginBottom: 30,
+              }}
+            >
               {movie.Title}
             </div>
             <div className="card-rating-operator">
@@ -59,8 +75,8 @@ function Home() {
                   display: "flex",
                 }}
               >
-                Rating: {[...Array(movie.Rating)].map((data) => rated)}
-                {[...Array(5 - movie.Rating)].map((data) => unRated)}
+                Rating: {[...Array(+movie.Rating)].map(() => rated)}
+                {[...Array(5 - +movie.Rating)].map(() => unRated)}
               </div>
 
               <div className="card-edit-del-buttons">
@@ -82,9 +98,20 @@ function Home() {
           </div>
         );
       })}
-      <div className="add-card" onClick={() => navigate("/create")}>
-        <AddCircleTwoToneIcon />
-      </div>
+      {moviesList.length ? (
+        <div
+          className="add-card"
+          onClick={() => navigate("/create")}
+          style={{
+            animation: `movieCardDisplay 500ms ease-out ${
+              100 * (moviesList.length + 2)
+            }ms forwards`,
+            opacity: 0,
+          }}
+        >
+          <AddCircleTwoToneIcon />
+        </div>
+      ) : null}
     </div>
   );
 }

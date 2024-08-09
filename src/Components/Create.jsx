@@ -19,10 +19,6 @@ const Create = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !method || !rating) {
-      alert("please fill all the fields");
-      return;
-    }
     await addDoc(usersCollectionRef, {
       Title: title,
       Method: method,
@@ -33,42 +29,56 @@ const Create = () => {
   return (
     <div className="update-create-movie">
       <form onSubmit={handleSubmit}>
-      <h2 style={{marginBottom: 40, fontSize: sizes}}>Create Movie </h2>
+        <h2 style={{ marginBottom: 40, fontSize: sizes }}>Create Movie Card </h2>
         <div className="creds">
-        <label
-        style={{ fontSize: sizes2 }}  htmlFor="title">Title</label>
-        <input
-          id="title"
-          value={title}
-          type="text"
-          style={{ fontSize: sizes2 }} 
-          onChange={(e) => setTitle(e.target.value)}
-        /></div>
+          <label style={{ fontSize: sizes2 }} htmlFor="title">
+            Title
+          </label>
+          <input
+            id="title"
+            value={title}
+            type="text"
+            required
+            style={{ fontSize: sizes2 }}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
         <div className="creds">
-        
-        <label
-        style={{ fontSize: sizes2 }}  htmlFor="method">Description</label>
-        <textarea
-          id="method"
-          value={method}
-          style={{ fontSize: sizes2 }} 
-          onChange={(e) => setMethod(e.target.value)}
-        /></div>
+          <label style={{ fontSize: sizes2 }} htmlFor="method">
+            Description
+          </label>
+          <textarea
+            id="method"
+            value={method}
+            style={{ fontSize: sizes2 }}
+            required
+            onChange={(e) => setMethod(e.target.value)}
+          />
+        </div>
         <div className="creds">
-        <label
-        style={{ fontSize: sizes2 }}  htmlFor="rating">Rating</label>
-        <input
-          id="rating"
-          value={rating}
-          type="number"
-          min={0}
-          max={5}
-          style={{ fontSize: sizes2 }} 
-          onChange={(e) => setRating(e.target.value)}
-        /></div>
+          <label style={{ fontSize: sizes2 }} htmlFor="rating">
+            Rating
+          </label>
+          <input
+            id="rating"
+            value={rating}
+            type="number"
+            required
+            min={0}
+            max={5}
+            style={{ fontSize: sizes2 }}
+            onChange={(e) => setRating(e.target.value)}
+          />
+        </div>
         <div className="creds">
-        <button 
-        style={{ fontSize: sizes2 }} type="submit">Submit</button>
+          <button style={{ fontSize: sizes2 }} type="submit">
+            Submit
+          </button>
+        </div>
+        <div className="creds">
+          <button style={{ fontSize: sizes2 , backgroundColor: "#e61212b8"  }} onClick={() => navigate(-1)}>
+            Cancel
+          </button>
         </div>
       </form>
     </div>

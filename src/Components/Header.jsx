@@ -47,7 +47,7 @@ const Header = () => {
                 </button>
               </>
             ) : (
-              <LogoutIcon onClick={() => handleSignOut()} />
+              <LogoutIcon  style={{ fontSize: sizes }} onClick={() => handleSignOut()} />
             )}
           </>
         ) : (

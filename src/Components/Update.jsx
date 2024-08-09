@@ -33,10 +33,6 @@ const Update = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!movieData.Title || !movieData.Rating || !movieData.Method) {
-      alert("Kindly fill all the details");
-      return;
-    }
     const payload = {
       Title: movieData.Title,
       Rating: movieData.Rating,
@@ -50,48 +46,67 @@ const Update = () => {
   return (
     <div className="update-create-movie">
       <form onSubmit={handleSubmit}>
-      <h2 style={{marginBottom: 40, fontSize: sizes}}>Update Movie Details </h2>
+        <h2 style={{ marginBottom: 40, fontSize: sizes }}>
+          Update Movie Details{" "}
+        </h2>
         <div className="creds">
-          <label style={{ fontSize: sizes2}} htmlFor="Title">Title</label>
+          <label style={{ fontSize: sizes2 }} htmlFor="Title">
+            Title
+          </label>
           <input
+            required
             id="Title"
             placeholder="Title..."
             value={movieData.Title}
-            type="text" 
-            style={{ fontSize: sizes2}}
+            type="text"
+            style={{ fontSize: sizes2 }}
             onChange={(e) =>
-                setMovieData({ ...movieData, [e.target.id]: e.target.value })
-              }
+              setMovieData({ ...movieData, [e.target.id]: e.target.value })
+            }
           />
         </div>
         <div className="creds">
-        <label style={{ fontSize: sizes2}} htmlFor="Method">Description</label>
-        <textarea
-          id="Method"
-          placeholder="Description..."
-          value={movieData.Method}
-          onChange={(e) =>
-            setMovieData({ ...movieData, [e.target.id]: e.target.value })
-          }
-           style={{ fontSize: sizes2}}/>
-           </div>
-        <div className="creds">
-        <label style={{ fontSize: sizes2}} htmlFor="Rating">Rating</label>
-        <input
-          id="Rating"
-          value={movieData.Rating}
-          type="number"
-          placeholder="Rating..."
-          max={5}
-          min={0}
-          onChange={(e) =>
-            setMovieData({ ...movieData, [e.target.id]: e.target.value })
-          }
-        style={{ fontSize: sizes2}}
-        />
+          <label style={{ fontSize: sizes2 }} htmlFor="Method">
+            Description
+          </label>
+          <textarea
+            required
+            id="Method"
+            placeholder="Description..."
+            value={movieData.Method}
+            onChange={(e) =>
+              setMovieData({ ...movieData, [e.target.id]: e.target.value })
+            }
+            style={{ fontSize: sizes2 }}
+          />
         </div>
         <div className="creds">
-        <button style={{ fontSize: sizes2}} type="submit">Submit</button>
+          <label style={{ fontSize: sizes2 }} htmlFor="Rating">
+            Rating
+          </label>
+          <input
+            required
+            id="Rating"
+            value={movieData.Rating}
+            type="number"
+            placeholder="Rating..."
+            max={5}
+            min={0}
+            onChange={(e) =>
+              setMovieData({ ...movieData, [e.target.id]: e.target.value })
+            }
+            style={{ fontSize: sizes2 }}
+          />
+        </div>
+        <div className="creds">
+          <button style={{ fontSize: sizes2 }} type="submit">
+            Submit
+          </button>
+        </div>
+        <div className="creds">
+          <button style={{ fontSize: sizes2, backgroundColor: "#e61212b8" }} onClick={() => navigate(-1)}>
+            Back
+          </button>
         </div>
       </form>
     </div>
