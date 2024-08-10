@@ -154,7 +154,7 @@ const Login = () => {
           <GitHubIcon
             style={{ cursor: "pointer" }}
             fontSize="large"
-            onClick={(e) => onGitHubSignIn(e)}
+            // onClick={(e) => onGitHubSignIn(e)}
           />
           <FacebookIcon
             style={{ color: "#316FF6", cursor: "pointer" }}
