@@ -5,6 +5,7 @@ import { useAuth } from "../../Auth/AuthContext";
 import {
   doSignInWithEmailAndPassword,
   doSignInWithGoogle,
+  githubSignIn,
 } from "../../Firebase/Auth";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -40,17 +41,23 @@ const Login = () => {
 
   const onGoogleSignIn = (e) => {
     e.preventDefault();
-    if (!isSigningIn) {
-      setIsSigningIn(true);
-      doSignInWithGoogle()
-        .then((res) => {
-          navigate("/home");
-        })
-        .catch((err) => {
-          alert(err.message);
-          setIsSigningIn(false);
-        });
-    }
+    doSignInWithGoogle()
+      .then((res) => {
+        navigate("/home");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
+  const onGitHubSignIn = (e) => {
+    e.preventDefault();
+    githubSignIn()
+      .then((res) => {
+        navigate("/home");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
   return (
     <div className="signUp-Login-container">
@@ -144,7 +151,11 @@ const Login = () => {
               </defs>
             </svg>
           </button>
-          <GitHubIcon style={{ cursor: "pointer" }} fontSize="large" />
+          <GitHubIcon
+            style={{ cursor: "pointer" }}
+            fontSize="large"
+            onClick={(e) => onGitHubSignIn(e)}
+          />
           <FacebookIcon
             style={{ color: "#316FF6", cursor: "pointer" }}
             fontSize="large"

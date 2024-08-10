@@ -6,6 +6,7 @@ import {
   updatePassword,
   signInWithPopup,
   GoogleAuthProvider,
+  GithubAuthProvider
 } from "firebase/auth";
 import { auth } from "./FirebaseConfig";
 
@@ -42,3 +43,18 @@ export const doSendEmailVerification = () => {
     url: `${window.location.origin}/home`,
   });
 };
+
+export const githubSignIn = () =>  {
+  const provider = new GithubAuthProvider();
+  return signInWithPopup(auth, provider)
+    .then((result) => {
+      const credential = GithubAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+      console.log("User:", user);
+      console.log("Token:", token);
+    })
+    .catch((error) => {
+      console.error("Error during sign-in:", error);
+    });
+}
