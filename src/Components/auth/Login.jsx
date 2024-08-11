@@ -102,7 +102,7 @@ const Login = () => {
           </div>
         </form>
         <div className="register-login-option">
-          Create New Account? <Link to="/register">Register</Link>
+          Create New Account? <Link to="/register">SignUp</Link>
         </div>
         <div className="social-media-Orline">
           ------------- Or Login with Others -------------
@@ -154,7 +154,7 @@ const Login = () => {
           <GitHubIcon
             style={{ cursor: "pointer" }}
             fontSize="large"
-            // onClick={(e) => onGitHubSignIn(e)}
+            onClick={(e) => onGitHubSignIn(e)}
           />
           <FacebookIcon
             style={{ color: "#316FF6", cursor: "pointer" }}
